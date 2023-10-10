@@ -2,12 +2,14 @@ import { useState } from "react";
 import { WithUseStateProblem } from "./WithUseStateProblem";
 import { WithUseStateSolution } from "./WithUseStateSolution";
 import { ComplexProvider } from "./ProviderSharedState";
+import { Reducer } from "./Reducer";
 
 const routes = {
 	withUseStateProblem: "#with-use-state-problem",
 	withUseStateSolution: "#with-use-state-solution",
 	provider: "#provider",
 	cProvider: "#complex-provider",
+	reducer: "#reducer",
 };
 
 export function Router() {
@@ -30,6 +32,9 @@ export function Router() {
 					<li>
 						<RouteAnchor to={routes.cProvider} label="<ComplexProvider />" onClick={rr.bind(rr, r + 1)} />
 					</li>
+					<li>
+						<RouteAnchor to={routes.reducer} label="Reducer" onClick={rr.bind(rr, r + 1)} />
+					</li>
 				</ul>
 			</nav>
 			<main>
@@ -37,6 +42,7 @@ export function Router() {
 				{hash === routes.withUseStateSolution && <WithUseStateSolution />}
 				{hash === routes.provider && <div>Provider</div>}
 				{hash === routes.cProvider && <ComplexProvider />}
+				{hash === routes.reducer && <Reducer />}
 			</main>
 		</>
 	);
