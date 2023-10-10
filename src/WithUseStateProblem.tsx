@@ -1,4 +1,4 @@
-import { ReactNode, useCallback, useState } from "react";
+import { useState, useCallback, ReactNode } from "react";
 import "./App.css";
 import { Total } from "./utils/total";
 
@@ -11,23 +11,8 @@ const renders = {
 	bottom: 0,
 };
 
-export function WithUseStateSolution() {
+export function WithUseStateProblem() {
 	renders.container++;
-
-	return (
-		<>
-			<p>Container {renders.container}</p>
-			<Top>
-				<Middle />
-			</Top>
-
-			<Total r={renders} />
-		</>
-	);
-}
-
-function Top({ children }: { children: ReactNode }) {
-	renders.top++;
 
 	const [count, setCount] = useState(0);
 	const onClick = useCallback(
@@ -41,6 +26,21 @@ function Top({ children }: { children: ReactNode }) {
 	return (
 		<>
 			<button onClick={onClick}>count {count}</button>
+			<p>Container {renders.container}</p>
+			<Top>
+				<Middle />
+			</Top>
+
+			<Total r={renders} />
+		</>
+	);
+}
+
+function Top({ children }: { children: ReactNode }) {
+	renders.top++;
+
+	return (
+		<>
 			<p>Top {renders.top}</p>
 			{children}
 		</>

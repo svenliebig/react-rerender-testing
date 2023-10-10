@@ -1,12 +1,7 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import './index.css'
-import { WithProvider } from './WithProvider'
-import { WithUseState } from './WithUseState'
-import { WithUseStateSolution } from './WithUseStateSolution'
-
+import ReactDOM from "react-dom/client";
+import { WithUseStateSolution } from "./WithUseStateSolution";
+import "./index.css";
+import { Router } from "./router";
 
 // I removed strict mode
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-    <WithUseStateSolution />
-)
+ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(<Router />);
