@@ -1,18 +1,8 @@
-import React, {
-	FC,
-	ReactNode,
-	createContext,
-	memo,
-	useCallback,
-	useContext,
-	useMemo,
-	useReducer,
-	useState,
-} from "react";
-import { renderer } from "./utils/renderer";
+import React, { FC, ReactNode, createContext, memo, useContext, useReducer, useState } from "react";
+import { Input } from "./components/Input";
 import { List } from "./components/List";
 import { Rendered } from "./components/Rendered";
-import { Input } from "./components/Input";
+import { renderer } from "./utils/renderer";
 
 // Layout
 export const Reducer = memo(() => {

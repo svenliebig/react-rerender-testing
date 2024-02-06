@@ -3,6 +3,7 @@ import { WithUseStateProblem } from "./WithUseStateProblem";
 import { WithUseStateSolution } from "./WithUseStateSolution";
 import { ComplexProvider } from "./ProviderSharedState";
 import { Reducer } from "./Reducer";
+import { Deffered } from "./Deffered";
 
 const routes = {
 	withUseStateProblem: "#with-use-state-problem",
@@ -10,6 +11,7 @@ const routes = {
 	provider: "#provider",
 	cProvider: "#complex-provider",
 	reducer: "#reducer",
+	deffered: "#deffered",
 };
 
 export function Router() {
@@ -35,6 +37,9 @@ export function Router() {
 					<li>
 						<RouteAnchor to={routes.reducer} label="Reducer" onClick={rr.bind(rr, r + 1)} />
 					</li>
+					<li>
+						<RouteAnchor to={routes.deffered} label="Deffered" onClick={rr.bind(rr, r + 1)} />
+					</li>
 				</ul>
 			</nav>
 			<main>
@@ -43,6 +48,7 @@ export function Router() {
 				{hash === routes.provider && <div>Provider</div>}
 				{hash === routes.cProvider && <ComplexProvider />}
 				{hash === routes.reducer && <Reducer />}
+				{hash === routes.deffered && <Deffered />}
 			</main>
 		</>
 	);

@@ -40,3 +40,20 @@
 .read-the-docs {
   color: #888;
 }
+
+.border {
+  border: 2px solid white;
+}
+
+.collapsable {
+  display: none;
+  overflow: hidden;
+}
+
+.collapsable.collapsing {
+  transition: height 300ms ease;
+}
+
+.collapsable.show {
+  display: block;
+}

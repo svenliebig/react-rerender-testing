@@ -1,5 +1,4 @@
 import { useState, useCallback, ReactNode } from "react";
-import "./App.css";
 import { Total } from "./utils/total";
 
 // All children get rerendered because the parent state changed

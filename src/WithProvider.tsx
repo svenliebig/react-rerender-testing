@@ -1,92 +1,101 @@
-
-import React, { createContext, memo, ReactNode, useCallback, useContext, useEffect, useState } from 'react'
-import './App.css'
-
+import React, { createContext, memo, ReactNode, useCallback, useContext, useEffect, useState } from "react";
 
 // All children get rerendered because the parent state changed
 //
-const c = createContext<{ count: number, set: React.Dispatch<React.SetStateAction<number>> }>({ count: 0, set: () => void 0 })
+const c = createContext<{ count: number; set: React.Dispatch<React.SetStateAction<number>> }>({
+	count: 0,
+	set: () => void 0,
+});
 
-let topRenders = 0
+let topRenders = 0;
 export function WithProvider() {
-    topRenders++
+	topRenders++;
 
-    return (
-        <Provider>
-            <Counter />
-            <div>
-                <p>Top {topRenders}</p>
-            </div>
-            <Middle />
+	return (
+		<Provider>
+			<Counter />
+			<div>
+				<p>Top {topRenders}</p>
+			</div>
+			<Middle />
 
-            <Total />
-        </Provider>
-    )
+			<Total />
+		</Provider>
+	);
 }
 
-let innerProviderRender = 0
+let innerProviderRender = 0;
 function InnerProvider() {
-    innerProviderRender++
-    return <p>Inner Provider {innerProviderRender}</p>
+	innerProviderRender++;
+	return <p>Inner Provider {innerProviderRender}</p>;
 }
 
-let providerRenders = 0
+let providerRenders = 0;
 function Provider({ children }: { children: ReactNode }) {
-    providerRenders++
-    const [count, setCount] = useState(0)
+	providerRenders++;
+	const [count, setCount] = useState(0);
 
-    return <c.Provider value={{ count, set: setCount }}>
-        <p>Provider {providerRenders}</p>
-        <InnerProvider />
-        {children}
-    </c.Provider>
+	return (
+		<c.Provider value={{ count, set: setCount }}>
+			<p>Provider {providerRenders}</p>
+			<InnerProvider />
+			{children}
+		</c.Provider>
+	);
 }
 
 function Total() {
-    const [total, setTotal] = useState(0)
+	const [total, setTotal] = useState(0);
 
-    setInterval(() => {
-        setTotal(topRenders + middleRenders + bottomRenders + counterRenders + providerRenders)
-    }, 50)
+	setInterval(() => {
+		setTotal(topRenders + middleRenders + bottomRenders + counterRenders + providerRenders);
+	}, 50);
 
-    return <p>
-        Total: {total}
-    </p>
+	return <p>Total: {total}</p>;
 }
 
-let counterRenders = 0
+let counterRenders = 0;
 function Counter() {
-    counterRenders++
-    const { set, count } = useContext(c)
-    const onClick = useCallback(() => set((count) => {
-        return count + 1
-    }), [set])
+	counterRenders++;
+	const { set, count } = useContext(c);
+	const onClick = useCallback(
+		() =>
+			set((count) => {
+				return count + 1;
+			}),
+		[set]
+	);
 
-    return <div>
-        <button onClick={onClick}>count {count}</button>
-        <p>Counter {counterRenders}</p>
-    </div>
+	return (
+		<div>
+			<button onClick={onClick}>count {count}</button>
+			<p>Counter {counterRenders}</p>
+		</div>
+	);
 }
 
 // we can remove the rerenders with React.memo
 // but we will add the calculation that the momoize function gives
-let middleRenders = 0
+let middleRenders = 0;
 const Middle = () => {
-    middleRenders++;
-    return <>
-        <div>
-            <p>Middle {middleRenders}</p>
-        </div>
-        <Bottom />
-    </>
-}
+	middleRenders++;
+	return (
+		<>
+			<div>
+				<p>Middle {middleRenders}</p>
+			</div>
+			<Bottom />
+		</>
+	);
+};
 
-let bottomRenders = 0
+let bottomRenders = 0;
 const Bottom = () => {
-    const { count } = useContext(c)
-    bottomRenders++;
-    return <div>
-        <p>Bottom {bottomRenders}</p>
-    </div>
-}
-
+	const { count } = useContext(c);
+	bottomRenders++;
+	return (
+		<div>
+			<p>Bottom {bottomRenders}</p>
+		</div>
+	);
+};
